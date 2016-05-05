@@ -5,5 +5,7 @@
 # (2) run this command (as root):
 #     update-rc.d automatic.sh 
 #
-python /home/root/iot/customizations/edison_python/my_examples/01.Basics/blink.py
+if [ -f ~/iot/flags/run_python_on_startup.flag ]; then
+	python /home/root/iot/customizations/edison_python/my_examples/01.Basics/blink.py
+fi
 
