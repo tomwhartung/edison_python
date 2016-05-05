@@ -3,10 +3,12 @@ import mraa
 import time
 
 ledPin = 13
-dotMs  = 200
-dashMs = 3 * dotMs
-elementGapMs = dotMs
-letterGapMs = dashMs
+# dotMs  = 200
+# dotSecs  = dotMs / 1000
+dotSecs  = 0.2
+dashSecs = 3 * dotSecs
+elementGapSecs = dotSecs
+letterGapSecs = dashSecs
 
 x = mraa.Gpio(ledPin)
 x.dir(mraa.DIR_OUT)
@@ -16,14 +18,14 @@ x.dir(mraa.DIR_OUT)
 #
 def dot():
     x.write(1)
-    time.sleep(dotMs)
+    time.sleep(dotSecs)
     x.write(0)
 #
 # dash: turn led on for dash milliseconds, then turn it off
 #
 def dash():
     x.write(1)
-    time.sleep(dashMs)
+    time.sleep(dashSecs)
     x.write(0)
 
 #
@@ -33,7 +35,11 @@ def dash():
 #
 while True:
     dot()
-    time.sleep(elementGapMs)
+    time.sleep(elementGapSecs)
     dash()
-    time.sleep(letterGapMs)
+    time.sleep(elementGapSecs)
+    dash()
+    time.sleep(elementGapSecs)
+    dot()
+    time.sleep(letterGapSecs)
 
