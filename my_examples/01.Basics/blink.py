@@ -15,28 +15,28 @@ dashSecs = 3 * dotSecs
 elementGapSecs = dotSecs
 letterGapSecs = dashSecs
 
-x = mraa.Gpio(ledPin)
+ledGpio = mraa.Gpio(ledPin)
 
 ##
 # dot: turn led on for dot milliseconds, then turn it off
 #
 def dot():
-    x.write(1)
+    ledGpio.write(1)
     time.sleep(dotSecs)
-    x.write(0)
+    ledGpio.write(0)
 ##
 # dash: turn led on for dash milliseconds, then turn it off
 #
 def dash():
-    x.write(1)
+    ledGpio.write(1)
     time.sleep(dashSecs)
-    x.write(0)
+    ledGpio.write(0)
 
 ##
 # setup: initialization
 #
 def setup() :
-    x.dir(mraa.DIR_OUT)
+    ledGpio.dir(mraa.DIR_OUT)
 ##
 # loop: what to do "forever"
 #
@@ -59,3 +59,5 @@ setup()
 
 while True:
     loop()
+
+exit(0)
