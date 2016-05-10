@@ -7,9 +7,9 @@
 # (2) run this command (as root):
 #     update-rc.d automatic.sh defaults
 #
-python /home/root/iot/customizations/edison_python/bluetooth/SPP-loopback.py &
+## python /home/root/iot/customizations/edison_python/bluetooth/SPP-loopback.py &
 
 if [ -f ~/iot/flags/run_python_on_startup.flag ]; then
-	python /home/root/iot/customizations/edison_python/my_examples/01.Basics/blink.py
+	python /home/root/iot/customizations/edison_python/my_examples/01.Basics/01-blink.py
 fi
 
