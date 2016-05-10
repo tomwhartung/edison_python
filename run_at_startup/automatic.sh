@@ -10,6 +10,7 @@
 ## python /home/root/iot/customizations/edison_python/bluetooth/SPP-loopback.py &
 
 if [ -f ~/iot/flags/run_python_on_startup.flag ]; then
-	python /home/root/iot/customizations/edison_python/my_examples/01.Basics/01-blink.py
+	python /home/root/iot/customizations/edison_python/my_examples/01.Basics/00-turnItOff.py
+##	python /home/root/iot/customizations/edison_python/my_examples/01.Basics/01-blink.py
 fi
 
