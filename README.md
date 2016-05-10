@@ -12,3 +12,8 @@ Contains files found via Chapter 4 of the Make: Getting Started With Intel Ediso
 * SPP-loopback.py - from http://downloadmirror.intel.com/24909/eng/SPP-loopback.py (use wget)
 
 See pages 106-112, about using bluetooth to control the LED.
+
+### my_examples
+
+Contains python scripts that do fairly simple tasks (at least for now).
+
