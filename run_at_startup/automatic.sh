@@ -1,5 +1,7 @@
 #!/bin/sh
 #
+# Note: this file is kept in the edison_python repo, run_at_startup directory
+#
 # To run this script at startup:
 # (1) copy this script (automatic.sh) into /etc/init.d (as root)
 # (2) run this command (as root):
