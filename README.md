@@ -2,6 +2,8 @@
 
 Python versions of the programming examples I am learning about.
 
+## NOTE: We must run these examples as root!!
+
 # Directories
 
 ### bluetooth
@@ -17,3 +19,6 @@ See pages 106-112, about using bluetooth to control the LED.
 
 Contains python scripts that do fairly simple tasks (at least for now).
 
+### run_at_startup
+
+Contains a script to run a python program on startup (if the flag is set), and instructions on how to set that up.
