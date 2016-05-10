@@ -24,14 +24,14 @@ ledGpio = mraa.Gpio(ledPin)
 ##
 # dot: turn led on for dot milliseconds, then turn it off
 #
-def dot():
+def dot() :
     ledGpio.write(1)
     time.sleep(dotSecs)
     ledGpio.write(0)
 ##
 # dash: turn led on for dash milliseconds, then turn it off
 #
-def dash():
+def dash() :
     ledGpio.write(1)
     time.sleep(dashSecs)
     ledGpio.write(0)
@@ -45,7 +45,7 @@ def dash():
 ##
 # blink the letter P: dot dash dash dot
 #
-def blinkLetterP
+def blinkLetterP() :
 	dot()
 	time.sleep(elementGapSecs)
 	dash()
@@ -56,7 +56,7 @@ def blinkLetterP
 ##
 # blink the letter Y: dash dot dash dash
 #
-def blinkLetterY
+def blinkLetterY() :
 	dash()
 	time.sleep(elementGapSecs)
 	dot()
@@ -67,12 +67,12 @@ def blinkLetterY
 ##
 # blink the letter T: dot dash dash dot
 #
-def blinkLetterT: dash
+def blinkLetterT() :
 	dash()
 ##
 # blink the letter H: dot dot dot dot
 #
-def blinkLetterH: dot dot dot dot
+def blinkLetterH() :
 	dot()
 	time.sleep(elementGapSecs)
 	dot()
@@ -83,7 +83,7 @@ def blinkLetterH: dot dot dot dot
 ##
 # blink the letter O: dash dash dash
 #
-def blinkLetterO
+def blinkLetterO() :
 	dash()
 	time.sleep(elementGapSecs)
 	dash()
@@ -92,7 +92,7 @@ def blinkLetterO
 ##
 # blink the letter N: dash dot
 #
-def blinkLetterN
+def blinkLetterN() :
 	dash()
 	time.sleep(elementGapSecs)
 	dot()
@@ -109,17 +109,17 @@ def setup() :
 # loop: what to do "forever"
 #
 def loop() :
-	blinkLetterP
+	blinkLetterP()
 	time.sleep(letterGapSecs)
-	blinkLetterY
+	blinkLetterY()
 	time.sleep(letterGapSecs)
-	blinkLetterT
+	blinkLetterT()
 	time.sleep(letterGapSecs)
-	blinkLetterH
+	blinkLetterH()
 	time.sleep(letterGapSecs)
-	blinkLetterO
+	blinkLetterO()
 	time.sleep(letterGapSecs)
-	blinkLetterN
+	blinkLetterN()
 	time.sleep(letterGapSecs)
 
 #
