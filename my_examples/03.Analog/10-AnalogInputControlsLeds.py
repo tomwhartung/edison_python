@@ -31,13 +31,15 @@ ledOutGpio4.dir(mraa.DIR_OUT)
 def loop() :
 	analogInInteger = analogInAio.read()
 	analogInFloat = analogInAio.readFloat()
-	print( 'analogInInteger: ' + str(analogInInteger) + '; analogInFloat: ' + str(analogInFloat) )
+##	timeToSleep = analogInFloat
+	timeToSleep = float( analogInInteger ) / 1000
+	print( 'analogInInteger: ' + str(analogInInteger) + '; analogInFloat: ' + str(analogInFloat) + '; timeToSleep: ' + str(timeToSleep) )
 	ledOutGpio3.write(HIGH)
 	ledOutGpio4.write(LOW)
-	time.sleep( analogInFloat )
+	time.sleep( timeToSleep )
 	ledOutGpio3.write(LOW)
 	ledOutGpio4.write(HIGH)
-	time.sleep( analogInFloat )
+	time.sleep( timeToSleep )
 
 #
 # mainline loop:
