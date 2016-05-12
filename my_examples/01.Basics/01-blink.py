@@ -1,5 +1,5 @@
 ##
-# blinky.py: blink a "P" (for python) in Morse Code "forever"
+# 01-blinky.py: blink a "P" (for python) in Morse Code "forever"
 #
 # A "P" in Morse Code is dot-dash-dash-dot
 # Morse Code Reference: https://en.wikipedia.org/wiki/Morse_code#Representation.2C_timing_and_speeds
@@ -65,7 +65,7 @@ def blinkLetterY() :
 	time.sleep(elementGapSecs)
 	dash()
 ##
-# blink the letter T: dot dash dash dot
+# blink the letter T: dash
 #
 def blinkLetterT() :
 	dash()
