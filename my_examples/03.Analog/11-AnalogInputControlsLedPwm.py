@@ -16,10 +16,6 @@ ledOutPin = 3
 ledOutPwm = mraa.Pwm( ledOutPin )
 ledOutPwm.enable( True )
 
-###################################
-# Functions for doin the stuffs
-#
-
 ##
 # loop: what to do "forever"
 #
@@ -30,7 +26,7 @@ def loop() :
 	ledOutPwm .write( analogInFloat )
 
 #
-# mainline loop:
+# mainline: calls loop repeatedly
 #
 readingGapSecs = 0.5
 while True:
