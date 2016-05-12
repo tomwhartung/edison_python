@@ -1,4 +1,5 @@
-##
+#!/usr/bin/python
+#
 # turnItOff.py: turn off the led, no sense wearing it out
 #
 import mraa

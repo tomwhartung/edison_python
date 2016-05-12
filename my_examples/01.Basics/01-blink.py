@@ -1,8 +1,6 @@
-##
-# 01-blinky.py: blink a "P" (for python) in Morse Code "forever"
+#!/usr/bin/python
 #
-# A "P" in Morse Code is dot-dash-dash-dot
-# Morse Code Reference: https://en.wikipedia.org/wiki/Morse_code#Representation.2C_timing_and_speeds
+# 01-blinky.py: blink the word PYTHON in Morse Code "forever"
 #
 import mraa
 import time
@@ -37,7 +35,9 @@ def dash() :
     ledGpio.write(0)
 
 ###################################
-# Functions for each letter
+# Functions for blinking each letter in Morse Code
+#
+# Morse Code Reference: https://en.wikipedia.org/wiki/Morse_code#Representation.2C_timing_and_speeds
 #
 # P                   Y                    T      H                 O                N
 # dot dash dash dot   dash dot dash dash   dash   dot dot dot dot   dash dash dash   dash dot
