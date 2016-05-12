@@ -1,4 +1,5 @@
-##
+#!/usr/bin/python
+#
 # blinky.py: blink a "P" (for python) in Morse Code "forever"
 #
 # A "P" in Morse Code is dot-dash-dash-dot
