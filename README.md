@@ -4,7 +4,7 @@ Python versions of the programming examples I am learning about.
 
 ## NOTE: We must run these examples as root!!
 
-# Directories
+# Subdirectories
 
 ### bluetooth
 
