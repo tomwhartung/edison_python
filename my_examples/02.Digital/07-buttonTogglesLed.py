@@ -16,27 +16,34 @@ ledOutPin = 3
 ledOutGpio = mraa.Gpio( ledOutPin )
 ledOutGpio.dir(mraa.DIR_OUT)
 
-###################################
-# Functions for doin the stuffs
+ledOutState = LOW
+
+#############################
+# Functions
 #
+def toggleLedState( ledOutState ) :
+	if ( ledOutState == LOW ) :
+		 ledOutState = HIGH
+	else :
+		 ledOutState = LOW
+	return ledOutState
 
 ##
 # loop: what to do "forever"
 #
 def loop() :
-	digitalInInteger = digitalInGpio.read()
-	print( 'digitalInInteger: ' + str(digitalInInteger) )
+	ledOutGpio.write( ledOutState )
+	digitalInState = digitalInGpio.read()
+	print( 'digitalInState: ' + str(digitalInState) )
 	if( digitalInInteger == 1 ) :
-		ledGpio3.write( HIGH )
-	else :
-		ledGpio3.write( LOW )
+		ledOutState = toggleLedState( ledOutState )
 
 #
 # mainline loop:
 #
-sleepSecs = 0.5
+loopDelaySecs = 0.1
 while True:
 	loop()
-	time.sleep( sleepSecs )
+	time.sleep( loopDelaySecs )
 
 exit(0)
