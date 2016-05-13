@@ -17,9 +17,10 @@ ledGpio2 = mraa.Gpio( ledPin2 )
 ledGpio3 = mraa.Gpio( ledPin3 )
 ledGpio4 = mraa.Gpio( ledPin4 )
 
-led2Secs = 0.25
-led3Secs = 0.5
-led4Secs = 0.75
+led2Secs = 0.75
+led3Secs = 1.5
+led4Secs = 2.25
+darkSecs = 1.0
 
 ##
 # setup: initialization
@@ -42,6 +43,7 @@ def loop() :
 	ledGpio4.write( HIGH )
 	time.sleep( led4Secs )
 	ledGpio4.write( LOW )
+	time.sleep( darkSecs )
 
 #
 # mainline code: in this case we do not loop, but just turn it off and exit
