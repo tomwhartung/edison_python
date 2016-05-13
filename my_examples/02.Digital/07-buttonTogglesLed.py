@@ -25,6 +25,7 @@ def toggleLedState( ledOutState ) :
 		 ledOutState = HIGH
 	else :
 		 ledOutState = LOW
+	ledOutGpio.write( ledOutState )
 	print ( 'toggleLedState returning ledOutState = ' + str(ledOutState) )
 	return ledOutState
 
@@ -32,14 +33,17 @@ def toggleLedState( ledOutState ) :
 # mainline loop:
 #
 ledOutState = LOW
+ledOutGpio.write( ledOutState )
 loopDelaySecs = 0.1
+afterToggleDelaySecs = 3
 
 while True:
-	ledOutGpio.write( ledOutState )
 	digitalInState = digitalInGpio.read()
 	print( 'digitalInState: ' + str(digitalInState) )
+
 	if( digitalInState == 1 ) :
 		ledOutState = toggleLedState( ledOutState )
+		time.sleep( afterToggleDelaySecs )
 
 	time.sleep( loopDelaySecs )
 
