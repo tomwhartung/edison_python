@@ -1,21 +1,13 @@
 #!/usr/bin/python
 #
-# 03-digital-read.py: Read and display the digital input value on pin D6 "forever"
+# 03-digital-read.py: Read and display the digital input value on pin D8 "forever"
 # --------------------------------------------------------------------------------
 #
 import mraa
 import time
 
-digitalInPin = 0
+digitalInPin = 8
 digitalInGpio = mraa.Gpio( digitalInPin )
-
-## ledOutPin = 3
-## ledOutGpio = mraa.Gpio( ledOutPin )
-## ledOutGpio.dir(mraa.DIR_OUT)
-
-###################################
-# Functions for doin the stuffs
-#
 
 ##
 # loop: what to do "forever"
