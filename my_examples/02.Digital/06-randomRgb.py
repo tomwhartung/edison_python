@@ -18,15 +18,15 @@ ledGpio2 = mraa.Gpio( ledPin2 )
 ledGpio3 = mraa.Gpio( ledPin3 )
 ledGpio4 = mraa.Gpio( ledPin4 )
 
-led2Secs = getRandomSecs()
-led3Secs = getRandomSecs()
-led4Secs = getRandomSecs()
-darkSecs = getRandomSecs()
+led2Secs = 0
+led3Secs = 0
+led4Secs = 0
+darkSecs = 0
 
 ##
 # Functions
 #
-def getRandomSecs()
+def getRandomSecs() :
 	maxSecs = 5.0
 	randomSecs = maxSecs * random.random()
 	return randomSecs
@@ -60,6 +60,11 @@ def loop() :
 #
 # mainline code: in this case we do not loop, but just turn it off and exit
 #
+led2Secs = getRandomSecs()
+led3Secs = getRandomSecs()
+led4Secs = getRandomSecs()
+darkSecs = getRandomSecs()
+
 setup()
 
 while( True ) :
