@@ -21,6 +21,10 @@ led2CycleMicrosecs = 0
 led3CycleMicrosecs = 0
 led4CycleMicrosecs = 0
 
+led2LastDatetime = 0
+led3LastDatetime = 0
+led4LastDatetime = 0
+
 ##
 # Functions
 #
@@ -59,11 +63,11 @@ def toggleState( currentState ) :
 ##
 # debug function to help us convert from using floats to using integers for the timing variables
 #
-def displayLedDatetime( ledNo, ledDatetime ) :
-	ledSecsOnly = ledDatetime.second
-	ledMicrosecsOnly = ledDatetime.microsecond
+def displayLastDatetime( ledNo, ledLastDatetime ) :
+	ledSecsOnly = ledLastDatetime.second
+	ledMicrosecsOnly = ledLastDatetime.microsecond
 	ledTotalMicrosecs = (1000000 * ledSecsOnly ) + ledMicrosecsOnly
-	print( 'ledNo ' + ledNo + ': ' + str(ledSecsOnly * 1000000) + ' + ' + str(ledMicrosecsOnly) + ' = ' + str(ledTotalMicrosecs) )
+	print( 'led' + ledNo + 'LastDateTime: ' + str(ledSecsOnly * 1000000) + ' + ' + str(ledMicrosecsOnly) + ' = ' + str(ledTotalMicrosecs) )
 
 ##
 # setup: initialization
@@ -72,6 +76,9 @@ def setup() :
 	global led2State, ledGpio2
 	global led3State, ledGpio3
 	global led4State, ledGpio4
+	global led2LastDatetime, led2CycleMicrosecs
+	global led3LastDatetime, led3CycleMicrosecs
+	global led4LastDatetime, led4CycleMicrosecs
 	led2State = HIGH
 	led3State = HIGH
 	led4State = HIGH
@@ -84,33 +91,44 @@ def setup() :
 	ledGpio2.write( led2State )
 	ledGpio3.write( led3State )
 	ledGpio4.write( led4State )
+	led2LastDatetime = datetime.today()
+	led3LastDatetime = datetime.today()
+	led4LastDatetime = datetime.today()
+	led2CycleMicrosecs = getRandomCycleMicrosecs()
+	led3CycleMicrosecs = getRandomCycleMicrosecs()
+	led4CycleMicrosecs = getRandomCycleMicrosecs()
+	print( '( ledSecsOnly * 1000000 ) + ledMicrosecsOnly = ledTotalMicrosecs' )
+	displayLastDatetime( '2', led2LastDatetime )
+	displayLastDatetime( '3', led3LastDatetime )
+	displayLastDatetime( '4', led4LastDatetime )
 	print( 'led2CycleMicrosecs: ' + str(led2CycleMicrosecs) )
 	print( 'led3CycleMicrosecs: ' + str(led3CycleMicrosecs) )
 	print( 'led4CycleMicrosecs: ' + str(led4CycleMicrosecs) )
+
 
 ##
 # loop: what to do "forever"
 #
 def loop( counter ) :
-	global led2State, led2Datetime
-	global led3State, led3Datetime
-	global led4State, led4Datetime
-	if ( isTimeToToggle( led2Datetime, led2CycleMicrosecs )  ) :
+	global led2State, led2LastDatetime
+	global led3State, led3LastDatetime
+	global led4State, led4LastDatetime
+	if ( isTimeToToggle( led2LastDatetime, led2CycleMicrosecs )  ) :
 		led2State = toggleState( led2State )
 		ledGpio2.write( led2State )
-		led2Datetime = datetime.today()
+		led2LastDatetime = datetime.today()
 		onOrOff = 'ON' if led2State else 'off'
 		sys.stdout.write( 'T2-' + onOrOff + ' ' )
-	if ( isTimeToToggle( led3Datetime, led3CycleMicrosecs )  ) :
+	if ( isTimeToToggle( led3LastDatetime, led3CycleMicrosecs )  ) :
 		led3State = toggleState( led3State )
 		ledGpio3.write( led3State )
-		led3Datetime = datetime.today()
+		led3LastDatetime = datetime.today()
 		onOrOff = 'ON' if led3State else 'off'
 		sys.stdout.write( 'T3-' + onOrOff + ' ' )
-	if ( isTimeToToggle( led4Datetime, led4CycleMicrosecs )  ) :
+	if ( isTimeToToggle( led4LastDatetime, led4CycleMicrosecs )  ) :
 		led4State = toggleState( led4State )
 		ledGpio4.write( led4State )
-		led4Datetime = datetime.today()
+		led4LastDatetime = datetime.today()
 		onOrOff = 'ON' if led4State else 'off'
 		sys.stdout.write( 'T4-' + onOrOff + ' ' )
 	loopSleepSecs = 0.1
@@ -119,21 +137,8 @@ def loop( counter ) :
 	sys.stdout.flush()
 
 #
-# mainline code: in this case we do not loop, but just turn it off and exit
+# mainline code: call setup and loop
 #
-led2CycleMicrosecs = getRandomCycleMicrosecs()
-led3CycleMicrosecs = getRandomCycleMicrosecs()
-led4CycleMicrosecs = getRandomCycleMicrosecs()
-
-led2Datetime = datetime.today()
-led3Datetime = datetime.today()
-led4Datetime = datetime.today()
-
-print( '( ledSecsOnly * 1000000 ) + ledMicrosecsOnly = ledTotalMicrosecs' )
-displayLedDatetime( '2', led2Datetime )
-displayLedDatetime( '3', led3Datetime )
-displayLedDatetime( '4', led4Datetime )
-
 setup()
 
 counter = 0
