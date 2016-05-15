@@ -64,6 +64,15 @@ def toggleState( currentState ) :
 		return HIGH
 
 ##
+# debug function to help us convert from using floats to using integers for the timing variables
+#
+def displayLedDatetime( ledNo, ledDatetime ) :
+	ledSecsOnly = ledDatetime.second
+	ledMicrosecsOnly = ledDatetime.microsecond
+	ledTotalMicrosecs = (1000000 * ledSecsOnly ) + ledMicrosecsOnly
+	print( 'ledNo: ' + ledNo + ': ledSecsOnly + ledMicrosecsOnly = ' + str(ledSecsOnly) + ' + ' + str(ledMicrosecsOnly) + ' = ledMicrosecs = ' + str(ledMicrosecs) )
+
+##
 # setup: initialization
 #
 def setup() :
@@ -105,14 +114,6 @@ led4Datetime = datetime.today()
 displayLedDatetime( '2', led2Datetime )
 displayLedDatetime( '3', led3Datetime )
 displayLedDatetime( '4', led4Datetime )
-##
-# debug function to help us convert from using floats to using integers for the timing variables
-#
-def displayLedDatetime( ledNo, ledDatetime ) :
-	ledSecsOnly = ledDatetime.second
-	ledMicrosecsOnly = ledDatetime.microsecond
-	ledTotalMicrosecs = (1000000 * ledSecsOnly ) + ledMicrosecsOnly
-	print( 'ledNo: ' + ledNo + ': ledSecsOnly + ledMicrosecsOnly = ' + str(ledSecsOnly) + ' + ' + str(ledMicrosecsOnly) + ' = ledMicrosecs = ' + str(ledMicrosecs) )
 
 ledGpio2.write( led2State )
 ledGpio3.write( led3State )
