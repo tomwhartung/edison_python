@@ -7,6 +7,7 @@ from datetime import *
 import math, random
 import mraa
 import time
+from __future__ import print_function
 
 LOW = 0
 HIGH = 1
@@ -48,7 +49,7 @@ def isTimeToToggle( cycleStartDatetime, cycleMicrosecs ) :
 	currentTotalMicrosecs = (1000000 * currentSecsOnly) + currentMicrosecsOnly
 	elapsedMicrosecs = currentTotalMicrosecs - cycleStartTotalMicrosecs
 	if ( cycleMicrosecs < elapsedMicrosecs ) :
-		print( 'currentTotalMicrosecs - cycleStartTotalMicrosecs = ' + str(currentTotalMicrosecs) + ' - ' + str(cycleStartTotalMicrosecs) + ' = ' + str(elapsedMicrosecs) )
+		## print( 'currentTotalMicrosecs - cycleStartTotalMicrosecs = ' + str(currentTotalMicrosecs) + ' - ' + str(cycleStartTotalMicrosecs) + ' = ' + str(elapsedMicrosecs) )
 		return True
 	else :
 		return False
@@ -92,7 +93,7 @@ def loop() :
 	global led4State
 	if ( isTimeToToggle( led2Datetime, led2CycleMicrosecs )  ) :
 		led2State = toggleState( led2State )
-		print( 'toggling led 2 to led2State = ' + str(led2State) )
+		## print( 'toggling led 2 to led2State = ' + str(led2State) )
 		ledGpio2.write( led2State )
 	if ( isTimeToToggle( led3Datetime, led3CycleMicrosecs )  ) :
 		led3State = toggleState( led3State )
@@ -102,6 +103,7 @@ def loop() :
 		ledGpio4.write( led4State )
 	loopSleepSecs = 0.1
 	time.sleep( loopSleepSecs )
+	print( '.', end="" )
 
 #
 # mainline code: in this case we do not loop, but just turn it off and exit
