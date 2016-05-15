@@ -104,7 +104,7 @@ led4Datetime = datetime.today()
 
 led2SecsOnly = led2Datetime.second
 led2Microsecs = led2Datetime.microsecond
-print( 'led2SecsOnly: ' + led2SecsOnly + '; led2Microsecs: ' + led2Microsecs )
+print( 'led2SecsOnly: ' + str(led2SecsOnly) + '; led2Microsecs: ' + str(led2Microsecs) )
 
 ledGpio2.write( led2State )
 ledGpio3.write( led3State )
