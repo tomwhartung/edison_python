@@ -7,7 +7,7 @@ from datetime import *
 import math, random
 import mraa
 import time
-from __future__ import print_function
+import sys
 
 LOW = 0
 HIGH = 1
@@ -103,7 +103,7 @@ def loop() :
 		ledGpio4.write( led4State )
 	loopSleepSecs = 0.1
 	time.sleep( loopSleepSecs )
-	print( '.', end="" )
+	sys.stdout.write( '.' )
 
 #
 # mainline code: in this case we do not loop, but just turn it off and exit
