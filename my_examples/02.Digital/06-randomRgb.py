@@ -32,8 +32,8 @@ led4CycleMicrosecs = 0
 # Functions
 #
 def getRandomCycleMicrosecs() :
-	randomCycleMicrosecs = maxCycleSecs * random.random()
-	return randomCycleMicrosecs
+	randomCycleMicrosecs = 1000000 * ( maxCycleSecs * random.random() )
+	return int(randomCycleMicrosecs)
 
 ##
 # Determine whether it is time to change the state of an led
@@ -70,7 +70,7 @@ def displayLedDatetime( ledNo, ledDatetime ) :
 	ledSecsOnly = ledDatetime.second
 	ledMicrosecsOnly = ledDatetime.microsecond
 	ledTotalMicrosecs = (1000000 * ledSecsOnly ) + ledMicrosecsOnly
-	print( 'ledNo: ' + ledNo + ': ledSecsOnly + ledMicrosecsOnly = ' + str(ledSecsOnly) + ' + ' + str(ledMicrosecsOnly) + ' = ledTotalMicrosecs = ' + str(ledTotalMicrosecs) )
+	print( 'ledNo ' + ledNo + ': ' + str(ledSecsOnly * 1000000) + ' + ' + str(ledMicrosecsOnly) + ' = ' + str(ledTotalMicrosecs) )
 
 ##
 # setup: initialization
@@ -111,6 +111,7 @@ led2Datetime = datetime.today()
 led3Datetime = datetime.today()
 led4Datetime = datetime.today()
 
+print( '( ledSecsOnly * 1000000 ) + ledMicrosecsOnly = ledTotalMicrosecs' )
 displayLedDatetime( '2', led2Datetime )
 displayLedDatetime( '3', led3Datetime )
 displayLedDatetime( '4', led4Datetime )
