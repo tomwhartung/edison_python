@@ -51,7 +51,7 @@ def isTimeToToggle( cycleStartDatetime, cycleMicrosecs ) :
 		print( 'currentTotalMicrosecs - cycleStartTotalMicrosecs = ' + str(currentTotalMicrosecs) + ' - ' + str(cycleStartTotalMicrosecs) + ' = ' + str(elapsedMicrosecs) )
 		return True
 	else :
-		print( 'currentTotalMicrosecs - cycleStartTotalMicrosecs = ' + str(elapsedMicrosecs) + ' < cycleMicrosecs = ' + cycleMicrosecs )
+		print( 'currentTotalMicrosecs - cycleStartTotalMicrosecs = ' + str(elapsedMicrosecs) + ' < cycleMicrosecs = ' + str(cycleMicrosecs) )
 		return False
 
 ##
