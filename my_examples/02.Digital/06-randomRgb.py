@@ -19,7 +19,7 @@ ledGpio2 = mraa.Gpio( ledPin2 )
 ledGpio3 = mraa.Gpio( ledPin3 )
 ledGpio4 = mraa.Gpio( ledPin4 )
 
-aed2State = HIGH
+led2State = HIGH
 led3State = HIGH
 led4State = HIGH
 
@@ -39,15 +39,15 @@ def getRandomCycleSecs() :
 # Determine whether it is time to change the state of an led
 #
 def isTimeToToggle( cycleStartDatetime, cycleSecs ) :
-	cycleStartSecsOnly = getAttr( cycleStartDatetime, 'second' )
-	cycleStartMicrosecs = getAttr( cycleStartDatetime, 'microsecond' )
+	cycleStartSecsOnly = cycleStartDatetime.second
+	cycleStartMicrosecs = cycleStartDatetime.microsecond
 	cycleStartSecs = cycleStartSecsOnly + ( cycleStartMicrosecs / 1000000 )
 	currentDatetime = datetime.today()
-	currentSecsOnly = getAttr( currentDatetime, 'second' )
-	currentMicrosecs = getAttr( currentDatetime, 'microsecond' )
+	currentSecsOnly = currentDatetime.second
+	currentMicrosecs = currentDatetime.microsecond
 	currentSecs = currentSecsOnly + ( currentMicrosecs / 1000000 )
 	elapsedSecs = currentSecs - cycleStartSecs
-	print( 'currentSecs - cycleStartSecs = ' + str(currentSecs) + ' - ' + str(cycleStartSecs) + ' = ' + elapsedSecs )
+	print( 'currentSecs - cycleStartSecs = ' + str(currentSecs) + ' - ' + str(cycleStartSecs) + ' = ' + str(elapsedSecs) )
 	if ( cycleSecs < elapsedSecs ) :
 		return True
 	else :
@@ -57,7 +57,7 @@ def isTimeToToggle( cycleStartDatetime, cycleSecs ) :
 # Return the opposite of the state passed in
 # This may seem unnecessary, but I just do not like statements of the form "state = !state"
 #
-def toggleState( currentState )
+def toggleState( currentState ) :
 	if ( currentState == HIGH ) :
 		return LOW
 	else :
