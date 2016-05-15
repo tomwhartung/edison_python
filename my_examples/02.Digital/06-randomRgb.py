@@ -24,7 +24,7 @@ led2State = HIGH
 led3State = HIGH
 led4State = HIGH
 
-maxCycleSecs = 10.0
+maxCycleSecs = 3.0
 led2CycleMicrosecs = 0
 led3CycleMicrosecs = 0
 led4CycleMicrosecs = 0
@@ -91,21 +91,27 @@ def setup() :
 # loop: what to do "forever"
 #
 def loop( counter ) :
-	global led2State
-	global led3State
-	global led4State
+	global led2State, led2Datetime
+	global led3State, led3Datetime
+	global led4State, led4Datetime
 	if ( isTimeToToggle( led2Datetime, led2CycleMicrosecs )  ) :
 		led2State = toggleState( led2State )
-		sys.stdout.write( 'T2-' + str(led2State) )
 		ledGpio2.write( led2State )
+		led2Datetime = datetime.today()
+		onOrOff = 'ON' if led2State else 'off'
+		sys.stdout.write( 'T2-' + onOrOff + ' ' )
 	if ( isTimeToToggle( led3Datetime, led3CycleMicrosecs )  ) :
 		led3State = toggleState( led3State )
-		sys.stdout.write( 'T3-' + str(led3State) )
 		ledGpio3.write( led3State )
+		led3Datetime = datetime.today()
+		onOrOff = 'ON' if led3State else 'off'
+		sys.stdout.write( 'T3-' + onOrOff + ' ' )
 	if ( isTimeToToggle( led4Datetime, led4CycleMicrosecs )  ) :
 		led4State = toggleState( led4State )
-		sys.stdout.write( 'T4-' + str(led4State) )
 		ledGpio4.write( led4State )
+		led4Datetime = datetime.today()
+		onOrOff = 'ON' if led4State else 'off'
+		sys.stdout.write( 'T4-' + onOrOff + ' ' )
 	loopSleepSecs = 0.1
 	time.sleep( loopSleepSecs )
 	sys.stdout.write( str(counter) + ' ' )
