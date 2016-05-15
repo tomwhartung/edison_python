@@ -23,32 +23,32 @@ led2State = HIGH
 led3State = HIGH
 led4State = HIGH
 
-maxCycleSecs = 5.0
-led2CycleSecs = 0
-led3CycleSecs = 0
-led4CycleSecs = 0
+maxCycleSecs = 1.0
+led2CycleMicrosecs = 0
+led3CycleMicrosecs = 0
+led4CycleMicrosecs = 0
 
 ##
 # Functions
 #
-def getRandomCycleSecs() :
-	randomCycleSecs = maxCycleSecs * random.random()
-	return randomCycleSecs
+def getRandomCycleMicrosecs() :
+	randomCycleMicrosecs = maxCycleSecs * random.random()
+	return randomCycleMicrosecs
 
 ##
 # Determine whether it is time to change the state of an led
 #
 def isTimeToToggle( cycleStartDatetime, cycleSecs ) :
 	cycleStartSecsOnly = cycleStartDatetime.second
-	cycleStartMicrosecs = cycleStartDatetime.microsecond
-	cycleStartSecs = cycleStartSecsOnly + float( cycleStartMicrosecs / 1000000 )
+	cycleStartMicrosecsOnly = cycleStartDatetime.microsecond
+	cycleStartTotalMicrosecs = (1000000 * cycleStartSecsOnly) + cycleStartMicrosecsOnly
 	currentDatetime = datetime.today()
 	currentSecsOnly = currentDatetime.second
-	currentMicrosecs = currentDatetime.microsecond
-	currentSecs = currentSecsOnly + float( currentMicrosecs / 1000000 )
-	elapsedSecs = currentSecs - cycleStartSecs
-	## print( 'currentSecs - cycleStartSecs = ' + str(currentSecs) + ' - ' + str(cycleStartSecs) + ' = ' + str(elapsedSecs) )
-	if ( cycleSecs < elapsedSecs ) :
+	currentMicrosecsOnly = currentDatetime.microsecond
+	currentTotalMicrosecs = (1000000 * currentSecsOnly) + currentMicrosecsOnly
+	elapsedMicrosecs = currentTotalMicrosecs - cycleStartTotalMicrosecs
+	## print( 'currentTotalMicrosecs - cycleStartTotalMicrosecs = ' + str(currentTotalMicrosecs) + ' - ' + str(cycleStartTotalMicrosecs) + ' = ' + str(elapsedMicrosecs) )
+	if ( cycleSecs < elapsedMicrosecs ) :
 		return True
 	else :
 		return False
@@ -70,9 +70,9 @@ def setup() :
 	ledGpio2.dir(mraa.DIR_OUT)
 	ledGpio3.dir(mraa.DIR_OUT)
 	ledGpio4.dir(mraa.DIR_OUT)
-	print( 'led2CycleSecs: ' + str(led2CycleSecs) )
-	print( 'led3CycleSecs: ' + str(led3CycleSecs) )
-	print( 'led4CycleSecs: ' + str(led4CycleSecs) )
+	print( 'led2CycleMicrosecs: ' + str(led2CycleMicrosecs) )
+	print( 'led3CycleMicrosecs: ' + str(led3CycleMicrosecs) )
+	print( 'led4CycleMicrosecs: ' + str(led4CycleMicrosecs) )
 
 ##
 # loop: what to do "forever"
@@ -81,30 +81,38 @@ def loop() :
 	global led2State
 	global led3State
 	global led4State
-	if ( isTimeToToggle( led2Datetime, led2CycleSecs )  ):
+	if ( isTimeToToggle( led2Datetime, led2CycleMicrosecs )  ):
 		led2State = toggleState( led2State )
 		ledGpio2.write( led2State )
-	if ( isTimeToToggle( led3Datetime, led3CycleSecs )  ):
+	if ( isTimeToToggle( led3Datetime, led3CycleMicrosecs )  ):
 		led3State = toggleState( led3State )
 		ledGpio3.write( led3State )
-	if ( isTimeToToggle( led4Datetime, led4CycleSecs )  ):
+	if ( isTimeToToggle( led4Datetime, led4CycleMicrosecs )  ):
 		led4State = toggleState( led4State )
 		ledGpio4.write( led4State )
 
 #
 # mainline code: in this case we do not loop, but just turn it off and exit
 #
-led2CycleSecs = getRandomCycleSecs()
-led3CycleSecs = getRandomCycleSecs()
-led4CycleSecs = getRandomCycleSecs()
+led2CycleMicrosecs = getRandomCycleMicrosecs()
+led3CycleMicrosecs = getRandomCycleMicrosecs()
+led4CycleMicrosecs = getRandomCycleMicrosecs()
 
 led2Datetime = datetime.today()
 led3Datetime = datetime.today()
 led4Datetime = datetime.today()
 
-led2SecsOnly = led2Datetime.second
-led2Microsecs = led2Datetime.microsecond
-print( 'led2SecsOnly: ' + str(led2SecsOnly) + '; led2Microsecs: ' + str(led2Microsecs) )
+displayLedDatetime( '2', led2Datetime )
+displayLedDatetime( '3', led3Datetime )
+displayLedDatetime( '4', led4Datetime )
+##
+# debug function to help us convert from using floats to using integers for the timing variables
+#
+def displayLedDatetime( ledNo, ledDatetime ) :
+	ledSecsOnly = ledDatetime.second
+	ledMicrosecsOnly = ledDatetime.microsecond
+	ledTotalMicrosecs = (1000000 * ledSecsOnly ) + ledMicrosecsOnly
+	print( 'ledNo: ' + ledNo + ': ledSecsOnly + ledMicrosecsOnly = ' + str(ledSecsOnly) + ' + ' + str(ledMicrosecsOnly) + ' = ledMicrosecs = ' + str(ledMicrosecs) )
 
 ledGpio2.write( led2State )
 ledGpio3.write( led3State )
