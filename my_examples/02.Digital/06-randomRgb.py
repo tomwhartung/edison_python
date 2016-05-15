@@ -103,6 +103,8 @@ def loop() :
 		print( 'toggling led 4 to led4State = ' + str(led4State) )
 		led4State = toggleState( led4State )
 		ledGpio4.write( led4State )
+	loopSleepSecs = 0.1
+	time.sleep( loopSleepSecs )
 
 #
 # mainline code: in this case we do not loop, but just turn it off and exit
