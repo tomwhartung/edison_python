@@ -87,7 +87,7 @@ def setup() :
 ##
 # loop: what to do "forever"
 #
-def loop() :
+def loop( counter ) :
 	global led2State
 	global led3State
 	global led4State
@@ -103,7 +103,8 @@ def loop() :
 		ledGpio4.write( led4State )
 	loopSleepSecs = 0.1
 	time.sleep( loopSleepSecs )
-	sys.stdout.write( '.' )
+	sys.stdout.write( str(counter) + ' ' )
+	sys.stdout.flush()
 
 #
 # mainline code: in this case we do not loop, but just turn it off and exit
@@ -127,7 +128,8 @@ ledGpio4.write( led4State )
 
 setup()
 
+counter = 0
 while( True ) :
-	loop()
+	loop( counter++ )
 
 exit(0)
