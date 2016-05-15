@@ -130,6 +130,7 @@ setup()
 
 counter = 0
 while( True ) :
-	loop( counter++ )
+	loop( counter )
+	counter += 1
 
 exit(0)
