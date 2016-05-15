@@ -70,7 +70,7 @@ def displayLedDatetime( ledNo, ledDatetime ) :
 	ledSecsOnly = ledDatetime.second
 	ledMicrosecsOnly = ledDatetime.microsecond
 	ledTotalMicrosecs = (1000000 * ledSecsOnly ) + ledMicrosecsOnly
-	print( 'ledNo: ' + ledNo + ': ledSecsOnly + ledMicrosecsOnly = ' + str(ledSecsOnly) + ' + ' + str(ledMicrosecsOnly) + ' = ledMicrosecs = ' + str(ledMicrosecs) )
+	print( 'ledNo: ' + ledNo + ': ledSecsOnly + ledMicrosecsOnly = ' + str(ledSecsOnly) + ' + ' + str(ledMicrosecsOnly) + ' = ledTotalMicrosecs = ' + str(ledTotalMicrosecs) )
 
 ##
 # setup: initialization
