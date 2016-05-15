@@ -80,6 +80,9 @@ def setup() :
 	ledGpio2.dir(mraa.DIR_OUT)
 	ledGpio3.dir(mraa.DIR_OUT)
 	ledGpio4.dir(mraa.DIR_OUT)
+	ledGpio2.write( led2State )
+	ledGpio3.write( led3State )
+	ledGpio4.write( led4State )
 	print( 'led2CycleMicrosecs: ' + str(led2CycleMicrosecs) )
 	print( 'led3CycleMicrosecs: ' + str(led3CycleMicrosecs) )
 	print( 'led4CycleMicrosecs: ' + str(led4CycleMicrosecs) )
@@ -93,13 +96,15 @@ def loop( counter ) :
 	global led4State
 	if ( isTimeToToggle( led2Datetime, led2CycleMicrosecs )  ) :
 		led2State = toggleState( led2State )
-		## print( 'toggling led 2 to led2State = ' + str(led2State) )
+		sys.stdout.write( 'T2-' + str(led2State) )
 		ledGpio2.write( led2State )
 	if ( isTimeToToggle( led3Datetime, led3CycleMicrosecs )  ) :
 		led3State = toggleState( led3State )
+		sys.stdout.write( 'T3-' + str(led3State) )
 		ledGpio3.write( led3State )
 	if ( isTimeToToggle( led4Datetime, led4CycleMicrosecs )  ) :
 		led4State = toggleState( led4State )
+		sys.stdout.write( 'T4-' + str(led4State) )
 		ledGpio4.write( led4State )
 	loopSleepSecs = 0.1
 	time.sleep( loopSleepSecs )
@@ -121,10 +126,6 @@ print( '( ledSecsOnly * 1000000 ) + ledMicrosecsOnly = ledTotalMicrosecs' )
 displayLedDatetime( '2', led2Datetime )
 displayLedDatetime( '3', led3Datetime )
 displayLedDatetime( '4', led4Datetime )
-
-ledGpio2.write( led2State )
-ledGpio3.write( led3State )
-ledGpio4.write( led4State )
 
 setup()
 
