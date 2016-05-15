@@ -23,7 +23,7 @@ led2State = HIGH
 led3State = HIGH
 led4State = HIGH
 
-maxCycleSecs = 1.0
+maxCycleSecs = 10.0
 led2CycleMicrosecs = 0
 led3CycleMicrosecs = 0
 led4CycleMicrosecs = 0
@@ -51,7 +51,6 @@ def isTimeToToggle( cycleStartDatetime, cycleMicrosecs ) :
 		print( 'currentTotalMicrosecs - cycleStartTotalMicrosecs = ' + str(currentTotalMicrosecs) + ' - ' + str(cycleStartTotalMicrosecs) + ' = ' + str(elapsedMicrosecs) )
 		return True
 	else :
-		print( 'currentTotalMicrosecs - cycleStartTotalMicrosecs = ' + str(elapsedMicrosecs) + ' < cycleMicrosecs = ' + str(cycleMicrosecs) )
 		return False
 
 ##
@@ -96,11 +95,9 @@ def loop() :
 		print( 'toggling led 2 to led2State = ' + str(led2State) )
 		ledGpio2.write( led2State )
 	if ( isTimeToToggle( led3Datetime, led3CycleMicrosecs )  ) :
-		print( 'toggling led 3 to led3State = ' + str(led3State) )
 		led3State = toggleState( led3State )
 		ledGpio3.write( led3State )
 	if ( isTimeToToggle( led4Datetime, led4CycleMicrosecs )  ) :
-		print( 'toggling led 4 to led4State = ' + str(led4State) )
 		led4State = toggleState( led4State )
 		ledGpio4.write( led4State )
 	loopSleepSecs = 0.1
