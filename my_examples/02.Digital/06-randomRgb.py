@@ -38,7 +38,7 @@ def getRandomCycleMicrosecs() :
 ##
 # Determine whether it is time to change the state of an led
 #
-def isTimeToToggle( cycleStartDatetime, cycleSecs ) :
+def isTimeToToggle( cycleStartDatetime, cycleMicrosecs ) :
 	cycleStartSecsOnly = cycleStartDatetime.second
 	cycleStartMicrosecsOnly = cycleStartDatetime.microsecond
 	cycleStartTotalMicrosecs = (1000000 * cycleStartSecsOnly) + cycleStartMicrosecsOnly
@@ -47,10 +47,11 @@ def isTimeToToggle( cycleStartDatetime, cycleSecs ) :
 	currentMicrosecsOnly = currentDatetime.microsecond
 	currentTotalMicrosecs = (1000000 * currentSecsOnly) + currentMicrosecsOnly
 	elapsedMicrosecs = currentTotalMicrosecs - cycleStartTotalMicrosecs
-	## print( 'currentTotalMicrosecs - cycleStartTotalMicrosecs = ' + str(currentTotalMicrosecs) + ' - ' + str(cycleStartTotalMicrosecs) + ' = ' + str(elapsedMicrosecs) )
-	if ( cycleSecs < elapsedMicrosecs ) :
+	if ( cycleMicrosecs < elapsedMicrosecs ) :
+		print( 'currentTotalMicrosecs - cycleStartTotalMicrosecs = ' + str(currentTotalMicrosecs) + ' - ' + str(cycleStartTotalMicrosecs) + ' = ' + str(elapsedMicrosecs) )
 		return True
 	else :
+		print( 'currentTotalMicrosecs - cycleStartTotalMicrosecs = ' + str(elapsedMicrosecs) + ' < cycleMicrosecs = ' + cycleMicrosecs )
 		return False
 
 ##
@@ -90,13 +91,16 @@ def loop() :
 	global led2State
 	global led3State
 	global led4State
-	if ( isTimeToToggle( led2Datetime, led2CycleMicrosecs )  ):
+	if ( isTimeToToggle( led2Datetime, led2CycleMicrosecs )  ) :
 		led2State = toggleState( led2State )
+		print( 'toggling led 2 to led2State = ' + str(led2State) )
 		ledGpio2.write( led2State )
-	if ( isTimeToToggle( led3Datetime, led3CycleMicrosecs )  ):
+	if ( isTimeToToggle( led3Datetime, led3CycleMicrosecs )  ) :
+		print( 'toggling led 3 to led3State = ' + str(led3State) )
 		led3State = toggleState( led3State )
 		ledGpio3.write( led3State )
-	if ( isTimeToToggle( led4Datetime, led4CycleMicrosecs )  ):
+	if ( isTimeToToggle( led4Datetime, led4CycleMicrosecs )  ) :
+		print( 'toggling led 4 to led4State = ' + str(led4State) )
 		led4State = toggleState( led4State )
 		ledGpio4.write( led4State )
 
