@@ -41,13 +41,13 @@ def getRandomCycleSecs() :
 def isTimeToToggle( cycleStartDatetime, cycleSecs ) :
 	cycleStartSecsOnly = cycleStartDatetime.second
 	cycleStartMicrosecs = cycleStartDatetime.microsecond
-	cycleStartSecs = cycleStartSecsOnly + ( cycleStartMicrosecs / 1000000 )
+	cycleStartSecs = cycleStartSecsOnly + float( cycleStartMicrosecs / 1000000 )
 	currentDatetime = datetime.today()
 	currentSecsOnly = currentDatetime.second
 	currentMicrosecs = currentDatetime.microsecond
-	currentSecs = currentSecsOnly + ( currentMicrosecs / 1000000 )
+	currentSecs = currentSecsOnly + float( currentMicrosecs / 1000000 )
 	elapsedSecs = currentSecs - cycleStartSecs
-	print( 'currentSecs - cycleStartSecs = ' + str(currentSecs) + ' - ' + str(cycleStartSecs) + ' = ' + str(elapsedSecs) )
+	## print( 'currentSecs - cycleStartSecs = ' + str(currentSecs) + ' - ' + str(cycleStartSecs) + ' = ' + str(elapsedSecs) )
 	if ( cycleSecs < elapsedSecs ) :
 		return True
 	else :
@@ -78,13 +78,16 @@ def setup() :
 # loop: what to do "forever"
 #
 def loop() :
+	global led2State
+	global led3State
+	global led4State
 	if ( isTimeToToggle( led2Datetime, led2CycleSecs )  ):
 		led2State = toggleState( led2State )
 		ledGpio2.write( led2State )
-	if ( isTimeToToggle( )  ):
+	if ( isTimeToToggle( led3Datetime, led3CycleSecs )  ):
 		led3State = toggleState( led3State )
 		ledGpio3.write( led3State )
-	if ( isTimeToToggle( )  ):
+	if ( isTimeToToggle( led4Datetime, led4CycleSecs )  ):
 		led4State = toggleState( led4State )
 		ledGpio4.write( led4State )
 
@@ -98,6 +101,10 @@ led4CycleSecs = getRandomCycleSecs()
 led2Datetime = datetime.today()
 led3Datetime = datetime.today()
 led4Datetime = datetime.today()
+
+led2SecsOnly = led2Datetime.second
+led2Microsecs = led2Datetime.microsecond
+print( 'led2SecsOnly: ' + led2SecsOnly + '; led2Microsecs: ' + led2Microsecs )
 
 ledGpio2.write( led2State )
 ledGpio3.write( led3State )
