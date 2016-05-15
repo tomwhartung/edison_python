@@ -16,14 +16,6 @@ ledPin2 = 2
 ledPin3 = 3
 ledPin4 = 4
 
-ledGpio2 = mraa.Gpio( ledPin2 )
-ledGpio3 = mraa.Gpio( ledPin3 )
-ledGpio4 = mraa.Gpio( ledPin4 )
-
-led2State = HIGH
-led3State = HIGH
-led4State = HIGH
-
 maxCycleSecs = 3.0
 led2CycleMicrosecs = 0
 led3CycleMicrosecs = 0
@@ -77,6 +69,15 @@ def displayLedDatetime( ledNo, ledDatetime ) :
 # setup: initialization
 #
 def setup() :
+	global led2State, ledGpio2
+	global led3State, ledGpio3
+	global led4State, ledGpio4
+	led2State = HIGH
+	led3State = HIGH
+	led4State = HIGH
+	ledGpio2 = mraa.Gpio( ledPin2 )
+	ledGpio3 = mraa.Gpio( ledPin3 )
+	ledGpio4 = mraa.Gpio( ledPin4 )
 	ledGpio2.dir(mraa.DIR_OUT)
 	ledGpio3.dir(mraa.DIR_OUT)
 	ledGpio4.dir(mraa.DIR_OUT)
