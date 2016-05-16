@@ -34,30 +34,12 @@ def getRandomCycleMicrosecs() :
 
 ##
 # Determine whether it is time to change the state of an led
-# OLD
-#
-def isTimeToToggleOLD( cycleStartDatetime, cycleMicrosecs ) :
-	cycleStartSecsOnly = cycleStartDatetime.second
-	cycleStartMicrosecsOnly = cycleStartDatetime.microsecond
-	cycleStartTotalMicrosecs = (1000000 * cycleStartSecsOnly) + cycleStartMicrosecsOnly
-	currentDatetime = datetime.today()
-	currentSecsOnly = currentDatetime.second
-	currentMicrosecsOnly = currentDatetime.microsecond
-	currentTotalMicrosecs = (1000000 * currentSecsOnly) + currentMicrosecsOnly
-	elapsedMicrosecs = currentTotalMicrosecs - cycleStartTotalMicrosecs
-	if ( cycleMicrosecs < elapsedMicrosecs ) :
-		## print( 'currentTotalMicrosecs - cycleStartTotalMicrosecs = ' + str(currentTotalMicrosecs) + ' - ' + str(cycleStartTotalMicrosecs) + ' = ' + str(elapsedMicrosecs) )
-		return True
-	else :
-		return False
-##
-# Determine whether it is time to change the state of an led
 # Try using timedelta
 #
 def isTimeToToggle( cycleStartDatetime, cycleMicrosecs ) :
 	currentDatetime = datetime.today()
 	elapsedTimedelta = currentDatetime - cycleStartDatetime
-	elapsedMicrosecs = elapsedTimedelta.totalSeconds() * 1000000
+	elapsedMicrosecs = elapsedTimedelta.total_seconds() * 1000000
 	if ( cycleMicrosecs < elapsedMicrosecs ) :
 		print( 'cycleMicrosecs: ' + str(cycleMicrosecs) + '; elapsedMicrosecs: ' + str(elapsedMicrosecs) )
 		return True
@@ -133,13 +115,13 @@ def loop( counter ) :
 		led2LastDatetime = datetime.today()
 		onOrOff = 'ON' if led2State else 'off'
 		sys.stdout.write( 'T2-' + onOrOff + '-' + str(counter) + ' ' )
-	if ( isTimeToToggleOLD( led3LastDatetime, led3CycleMicrosecs )  ) :
+	if ( isTimeToToggle( led3LastDatetime, led3CycleMicrosecs )  ) :
 		led3State = toggleState( led3State )
 		ledGpio3.write( led3State )
 		led3LastDatetime = datetime.today()
 		## onOrOff = 'ON' if led3State else 'off'
 		## sys.stdout.write( 'T3-' + onOrOff + ' ' )
-	if ( isTimeToToggleOLD( led4LastDatetime, led4CycleMicrosecs )  ) :
+	if ( isTimeToToggle( led4LastDatetime, led4CycleMicrosecs )  ) :
 		led4State = toggleState( led4State )
 		ledGpio4.write( led4State )
 		led4LastDatetime = datetime.today()
