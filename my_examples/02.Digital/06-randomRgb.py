@@ -118,22 +118,22 @@ def loop( counter ) :
 		ledGpio2.write( led2State )
 		led2LastDatetime = datetime.today()
 		onOrOff = 'ON' if led2State else 'off'
-		sys.stdout.write( 'T2-' + onOrOff + ' ' )
+		sys.stdout.write( 'T2-' + onOrOff + '-' + str(counter) + ' ' )
 	if ( isTimeToToggle( led3LastDatetime, led3CycleMicrosecs )  ) :
 		led3State = toggleState( led3State )
 		ledGpio3.write( led3State )
 		led3LastDatetime = datetime.today()
-		onOrOff = 'ON' if led3State else 'off'
-		sys.stdout.write( 'T3-' + onOrOff + ' ' )
+		## onOrOff = 'ON' if led3State else 'off'
+		## sys.stdout.write( 'T3-' + onOrOff + ' ' )
 	if ( isTimeToToggle( led4LastDatetime, led4CycleMicrosecs )  ) :
 		led4State = toggleState( led4State )
 		ledGpio4.write( led4State )
 		led4LastDatetime = datetime.today()
-		onOrOff = 'ON' if led4State else 'off'
-		sys.stdout.write( 'T4-' + onOrOff + ' ' )
-	loopSleepSecs = 0.1
-	time.sleep( loopSleepSecs )
-	sys.stdout.write( str(counter) + ' ' )
+		## onOrOff = 'ON' if led4State else 'off'
+		## sys.stdout.write( 'T4-' + onOrOff + ' ' )
+	## loopSleepSecs = 0.1
+	## time.sleep( loopSleepSecs )
+	## sys.stdout.write( str(counter) + ' ' )
 	sys.stdout.flush()
 
 #
