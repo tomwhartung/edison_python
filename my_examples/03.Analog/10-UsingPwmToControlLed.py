@@ -28,8 +28,10 @@ brightnessPercent = 0
 deltaPercent = 5
 while True:
 	loop( brightnessPercent )
-	if( brightnessPercent <= 0 || brightnessPercent >= 100 ) :
-		deltaPercent = - deltaPercent
+	if( brightnessPercent <= 0 ) :
+		deltaPercent = 5
+	else if( brightnessPercent >= 100 ) :
+		deltaPercent = -5
 	brightnessPercent = brightnessPercent + deltaPercent
 	time.sleep( loopSleepSecs )
 
