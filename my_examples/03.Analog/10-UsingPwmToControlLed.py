@@ -16,9 +16,9 @@ ledOutPwm.enable( True )
 # loop: what to do "forever"
 #
 def loop( brightnessPercent ) :
-	print( 'brightnessPercent: ' + str(brightnessPercent) )
-	brightnessValue = brightnessPercent / 100
-	ledOutPwm.write( brightnessPercent )
+	brightnessValue = float( brightnessPercent ) / 100
+	print( 'brightnessPercent: ' + str(brightnessPercent) + '; brightnessValue: ' + str(brightnessValue) )
+	ledOutPwm.write( brightnessValue )
 
 #
 # mainline: calls loop repeatedly
@@ -30,7 +30,7 @@ while True:
 	loop( brightnessPercent )
 	if( brightnessPercent <= 0 ) :
 		deltaPercent = 5
-	else if( brightnessPercent >= 100 ) :
+	elif( brightnessPercent >= 100 ) :
 		deltaPercent = -5
 	brightnessPercent = brightnessPercent + deltaPercent
 	time.sleep( loopSleepSecs )
