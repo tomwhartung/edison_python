@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
-# 07-buttonTogglesLed.py: when the button is pressed, toggle the led
-# ------------------------------------------------------------------
+# 17-buttonTogglesLed.py: when the touch sensor is touched, toggle the led
+# ------------------------------------------------------------------------
 #
 import mraa
 import time
@@ -9,10 +9,10 @@ import time
 LOW = 0
 HIGH = 1
 
-digitalInPin = 8
+digitalInPin = 7
 digitalInGpio = mraa.Gpio( digitalInPin )
 
-ledOutPin = 3
+ledOutPin = 2
 ledOutGpio = mraa.Gpio( ledOutPin )
 ledOutGpio.dir(mraa.DIR_OUT)
 
