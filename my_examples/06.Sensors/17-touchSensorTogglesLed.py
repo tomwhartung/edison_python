@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
-# 17-buttonTogglesLed.py: when the touch sensor is touched, toggle the led
-# ------------------------------------------------------------------------
+# 17-touchSensorTogglesLed.py: when the touch sensor is touched, toggle the led
+# -----------------------------------------------------------------------------
 #
 import mraa
 import time
