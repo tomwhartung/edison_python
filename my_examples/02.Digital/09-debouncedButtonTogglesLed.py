@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
-# 07-buttonTogglesLed.py: when the button is pressed, toggle the led
-# ------------------------------------------------------------------
+# 09-debouncedButtonTogglesLed.py: when button is pressed, toggle led - debounced version
+# ---------------------------------------------------------------------------------------
 #
 import mraa
 import time
@@ -29,15 +29,10 @@ def toggleLedState( ledOutState ) :
 	print ( 'toggleLedState returning ledOutState = ' + str(ledOutState) )
 	return ledOutState
 
+##
+# Loop: runs "forever" (until program stopped)
 #
-# mainline loop:
-#
-ledOutState = LOW
-ledOutGpio.write( ledOutState )
-loopDelaySecs = 0.1
-afterToggleDelaySecs = 3
-
-while True:
+def loop() :
 	digitalInState = digitalInGpio.read()
 	print( 'digitalInState: ' + str(digitalInState) )
 
@@ -45,6 +40,16 @@ while True:
 		ledOutState = toggleLedState( ledOutState )
 		time.sleep( afterToggleDelaySecs )
 
+
+#
+# mainline loop:
+#
+ledOutState = LOW
+ledOutGpio.write( ledOutState )
+loopDelaySecs = 0.1
+
+while True:
+	loop()
 	time.sleep( loopDelaySecs )
 
 exit(0)
