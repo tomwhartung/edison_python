@@ -15,9 +15,20 @@ digitalInGpio = mraa.Gpio( digitalInPin )
 ledOutPin = 3
 ledOutGpio = mraa.Gpio( ledOutPin )
 ledOutGpio.dir(mraa.DIR_OUT)
+ledOutState = LOW
 
 #############################
 # Functions
+#
+##
+# Initialize the LED as output and set its initial state
+#
+def setup() :
+	ledOutGpio.dir(mraa.DIR_OUT)
+	ledOutGpio.write( ledOutState )
+
+##
+# Toggles the state of the led
 #
 def toggleLedState( ledOutState ) :
 	print ( 'toggleLedState ledOutState = ' + str(ledOutState) )
@@ -33,6 +44,7 @@ def toggleLedState( ledOutState ) :
 # Loop: runs "forever" (until program stopped)
 #
 def loop() :
+	global ledOutState
 	digitalInState = digitalInGpio.read()
 	print( 'digitalInState: ' + str(digitalInState) )
 
@@ -42,10 +54,9 @@ def loop() :
 
 
 #
-# mainline loop:
+# mainline code: run setup and loop functions
 #
-ledOutState = LOW
-ledOutGpio.write( ledOutState )
+setup()
 loopDelaySecs = 0.1
 
 while True:
