@@ -4,18 +4,26 @@
 # ---------------------------------------------------------------------------------------
 #
 import mraa
+import datetime
 import time
+
+RELEASED = 0
+PRESSED = 1
+digitalInPin = 8
+digitalInGpio = mraa.Gpio( digitalInPin )
+lastInState = RELEASED
+currentInState = RELEASED
 
 LOW = 0
 HIGH = 1
-
-digitalInPin = 8
-digitalInGpio = mraa.Gpio( digitalInPin )
-
 ledOutPin = 3
 ledOutGpio = mraa.Gpio( ledOutPin )
 ledOutGpio.dir(mraa.DIR_OUT)
 ledOutState = LOW
+
+afterToggleDelaySecs = 0.001
+lastDebounceTime = datetime.datetime()
+debounceWaitMillis = 50     # time to wait for bouncing to end
 
 #############################
 # Functions
@@ -44,9 +52,15 @@ def toggleLedState( ledOutState ) :
 # Loop: runs "forever" (until program stopped)
 #
 def loop() :
+	global lastInState
+	global currentInState
 	global ledOutState
-	digitalInState = digitalInGpio.read()
+	global lastDebounceTime
+	currentInState = digitalInGpio.read()
 	print( 'digitalInState: ' + str(digitalInState) )
+
+	currentDatetime = datetime.datetime()
+	lastDebounceTime = currentDatetime
 
 	if( digitalInState == 1 ) :
 		ledOutState = toggleLedState( ledOutState )
@@ -57,7 +71,7 @@ def loop() :
 # mainline code: run setup and loop functions
 #
 setup()
-loopDelaySecs = 0.1
+loopDelaySecs = 0.005
 
 while True:
 	loop()
