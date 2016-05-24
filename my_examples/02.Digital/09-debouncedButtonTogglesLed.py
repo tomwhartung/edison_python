@@ -57,7 +57,7 @@ def loop() :
 	global ledOutState
 	global lastDebounceTime
 	currentInState = digitalInGpio.read()
-	print( 'digitalInState: ' + str(digitalInState) )
+	print( currentlInState: ' + str(currentInState) )
 
 	currentDatetime = datetime.datetime.today()
 	lastDebounceTime = currentDatetime
