@@ -22,7 +22,7 @@ ledOutGpio.dir(mraa.DIR_OUT)
 ledOutState = LOW
 
 afterToggleDelaySecs = 0.001
-lastDebounceTime = datetime.datetime()
+lastDebounceTime = datetime.datetime.today()
 debounceWaitMillis = 50     # time to wait for bouncing to end
 
 #############################
@@ -59,7 +59,7 @@ def loop() :
 	currentInState = digitalInGpio.read()
 	print( 'digitalInState: ' + str(digitalInState) )
 
-	currentDatetime = datetime.datetime()
+	currentDatetime = datetime.datetime.today()
 	lastDebounceTime = currentDatetime
 
 	if( digitalInState == 1 ) :
