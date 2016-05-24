@@ -62,7 +62,7 @@ def loop() :
 	currentDatetime = datetime.datetime.today()
 	lastDebounceTime = currentDatetime
 
-	if( digitalInState == 1 ) :
+	if( currentInState == 1 ) :
 		ledOutState = toggleLedState( ledOutState )
 		time.sleep( afterToggleDelaySecs )
 
