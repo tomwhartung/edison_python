@@ -19,7 +19,7 @@ HIGH = 1
 ledOutPin = 3
 ledOutGpio = mraa.Gpio( ledOutPin )
 ledOutGpio.dir(mraa.DIR_OUT)
-ledOutState = LOW
+ledOutState = HIGH
 
 ## afterToggleDelaySecs = 0.001
 lastPressDetectedTime = datetime.datetime.today()
