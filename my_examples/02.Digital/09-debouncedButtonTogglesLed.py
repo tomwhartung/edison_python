@@ -11,8 +11,8 @@ RELEASED = 0
 PRESSED = 1
 digitalInPin = 8
 digitalInGpio = mraa.Gpio( digitalInPin )
-lastInState = RELEASED
-currentInState = RELEASED
+savedButtonReading = RELEASED
+currentButtonReading = RELEASED
 
 LOW = 0
 HIGH = 1
@@ -21,9 +21,9 @@ ledOutGpio = mraa.Gpio( ledOutPin )
 ledOutGpio.dir(mraa.DIR_OUT)
 ledOutState = LOW
 
-afterToggleDelaySecs = 0.001
+## afterToggleDelaySecs = 0.001
 lastDebounceTime = datetime.datetime.today()
-debounceWaitMillis = 50     # time to wait for bouncing to end
+debounceWaitSeconds = 0.05     # seconds to wait for bouncing to end
 
 #############################
 # Functions
@@ -44,7 +44,6 @@ def toggleLedState( ledOutState ) :
 		 ledOutState = HIGH
 	else :
 		 ledOutState = LOW
-	ledOutGpio.write( ledOutState )
 	print ( 'toggleLedState returning ledOutState = ' + str(ledOutState) )
 	return ledOutState
 
@@ -52,19 +51,23 @@ def toggleLedState( ledOutState ) :
 # Loop: runs "forever" (until program stopped)
 #
 def loop() :
-	global lastInState
-	global currentInState
+	global savedButtonReading
 	global ledOutState
 	global lastDebounceTime
-	currentInState = digitalInGpio.read()
-	print( 'currentlInState: ' + str(currentInState) )
+	currentButtonReading = digitalInGpio.read()
 
 	currentDatetime = datetime.datetime.today()
-	lastDebounceTime = currentDatetime
 
-	if( currentInState == 1 ) :
+	if( currentButtonReading != savedButtonReading ) :
+		lastDebounceTime = currentDatetime
+
+	timeSinceReadingChanged = currentDatetime - lastDebounceTime
+
+	if( timeSinceReadingChanged.total_seconds() > debounceWaitSeconds ) :
+		print( 'currentButtonReading: ' + str(currentButtonReading) )
+		savedButtonReading = currentButtonReading
 		ledOutState = toggleLedState( ledOutState )
-		time.sleep( afterToggleDelaySecs )
+		ledOutGpio.write( ledOutState )
 
 
 #
@@ -72,6 +75,8 @@ def loop() :
 #
 setup()
 loopDelaySecs = 0.005
+currentDatetime = datetime.datetime.today()
+lastDebounceTime = currentDatetime
 
 while True:
 	loop()
