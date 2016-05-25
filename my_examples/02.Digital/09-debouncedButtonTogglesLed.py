@@ -71,7 +71,7 @@ def loop() :
 	if( timeSinceReadingChanged.total_seconds() > debounceWaitSeconds ) :
 		if( currentButtonReading != savedButtonState ) :
 			savedButtonState = currentButtonReading
-			if( currentButtonState == PRESSED ) :
+			if( currentButtonReading == PRESSED ) :
 				ledOutState = toggleLedState( ledOutState )
 
 	ledOutGpio.write( ledOutState )
