@@ -1,18 +1,18 @@
 #!/usr/bin/python
 #
-# 09-debouncedButtonTogglesLed.py: when button is pressed, toggle led - debounced version
-# ---------------------------------------------------------------------------------------
+# 19-debouncedTouchSensorTogglesLed.py: when touch sensor is touched, toggle led - debounced version
+# --------------------------------------------------------------------------------------------------
 #
 import mraa
 import datetime
 import time
 
 RELEASED = 0
-PRESSED = 1
+TOUCHED = 1
 digitalInPin = 8
 digitalInGpio = mraa.Gpio( digitalInPin )
-savedButtonState = RELEASED
-lastButtonReading = RELEASED
+savedTouchSensorState = RELEASED
+lastTouchSensorReading = RELEASED
 
 LOW = 0
 HIGH = 1
@@ -51,31 +51,31 @@ def toggleLedState( ledOutState ) :
 # Loop: runs "forever" (until program stopped)
 #
 def loop() :
-	global savedButtonState
-	global lastButtonReading
+	global savedTouchSensorState
+	global lastTouchSensorReading
 	global ledOutState
 	global lastPressDetectedTime
-	currentButtonReading = digitalInGpio.read()
+	currentTouchSensorReading = digitalInGpio.read()
 
 	currentDatetime = datetime.datetime.today()
 
-	if( currentButtonReading != lastButtonReading ) :
+	if( currentTouchSensorReading != lastTouchSensorReading ) :
 		lastPressDetectedTime = currentDatetime
 
 	timeSinceReadingChanged = currentDatetime - lastPressDetectedTime
 	#
-	# Take the change seriously only if the change persists for debounceWaitSeconds
-	#   Save the button state only if current state is not equal to the saved state
-	#     Toggle the led only if the button state is Pressed
+	# Take the state change seriously only if it persists for debounceWaitSeconds
+	#   Save the touch sensor state only if current state is not equal to the saved state
+	#     Toggle the led only if the touch sensor state is Pressed
 	#
 	if( timeSinceReadingChanged.total_seconds() > debounceWaitSeconds ) :
-		if( currentButtonReading != savedButtonState ) :
-			savedButtonState = currentButtonReading
-			if( currentButtonReading == PRESSED ) :
+		if( currentTouchSensorReading != savedTouchSensorState ) :
+			savedTouchSensorState = currentTouchSensorReading
+			if( currentTouchSensorReading == TOUCHED ) :
 				ledOutState = toggleLedState( ledOutState )
 
 	ledOutGpio.write( ledOutState )
-	lastButtonReading = currentButtonReading
+	lastTouchSensorReading = currentTouchSensorReading
 
 #
 # mainline code: run setup and loop functions
