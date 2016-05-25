@@ -11,8 +11,8 @@ RELEASED = 0
 PRESSED = 1
 digitalInPin = 8
 digitalInGpio = mraa.Gpio( digitalInPin )
-savedButtonReading = RELEASED
-currentButtonReading = RELEASED
+savedButtonState = RELEASED
+lastButtonReading = RELEASED
 
 LOW = 0
 HIGH = 1
@@ -51,24 +51,27 @@ def toggleLedState( ledOutState ) :
 # Loop: runs "forever" (until program stopped)
 #
 def loop() :
-	global savedButtonReading
+	global savedButtonState
+	global lastButtonReading
 	global ledOutState
 	global lastDebounceTime
 	currentButtonReading = digitalInGpio.read()
 
 	currentDatetime = datetime.datetime.today()
 
-	if( currentButtonReading != savedButtonReading ) :
+	if( currentButtonReading != lastButtonReading ) :
 		lastDebounceTime = currentDatetime
 
 	timeSinceReadingChanged = currentDatetime - lastDebounceTime
 
 	if( timeSinceReadingChanged.total_seconds() > debounceWaitSeconds ) :
-		print( 'currentButtonReading: ' + str(currentButtonReading) )
-		savedButtonReading = currentButtonReading
-		ledOutState = toggleLedState( ledOutState )
-		ledOutGpio.write( ledOutState )
+		if( currentButtonReading != savedButtonState ) :
+			savedButtonState = currentButtonReading
+			if( savedButtonState == PRESSED )
+				ledOutState = toggleLedState( ledOutState )
 
+	ledOutGpio.write( ledOutState )
+	lastButtonReading = currentButtonReading
 
 #
 # mainline code: run setup and loop functions
