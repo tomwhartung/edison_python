@@ -67,7 +67,7 @@ def loop() :
 	if( timeSinceReadingChanged.total_seconds() > debounceWaitSeconds ) :
 		if( currentButtonReading != savedButtonState ) :
 			savedButtonState = currentButtonReading
-			if( savedButtonState == PRESSED )
+			if( savedButtonState == PRESSED ) :
 				ledOutState = toggleLedState( ledOutState )
 
 	ledOutGpio.write( ledOutState )
@@ -81,7 +81,7 @@ loopDelaySecs = 0.005
 currentDatetime = datetime.datetime.today()
 lastDebounceTime = currentDatetime
 
-while True:
+while True :
 	loop()
 	time.sleep( loopDelaySecs )
 
