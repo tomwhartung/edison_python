@@ -17,7 +17,17 @@ See pages 106-112, about using bluetooth to control the LED.
 
 ### my_examples
 
-Contains python scripts that do fairly simple tasks (at least for now).
+Contains python scripts that demonstrate:
+
+* Digital read and write
+* Analog input
+* Pulse Width Modulation (PWM)
+* I2C (tbd)
+
+These demo programs were inspired by the arduino versions, the node demos, and the book Make: Getting Started With Intel Edison.
+
+For information pertaining to all programs, see the README for the arduino versions:
+* edison_arduino repo at https://github.com/tomwhartung/edison_arduino
 
 ### run_at_startup
 
