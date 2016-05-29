@@ -8,7 +8,7 @@ import mraa
 #
 # Init I2C
 #
-x = mraa.I2c(ledPin)
+x = mraa.I2c( 1 )
 
 #
 # Set up some addresses and variables for the accelerometer
